@@ -41,8 +41,16 @@ namespace ConsoleApp1
                 conn.Open();
                 Console.WriteLine("Connection ready");
 
-                int userid = 1;
-                int tabnumber = 1;
+                // get last userid
+                string getUserId = String.Format("SELECT MAX(ID) FROM pList");
+                SqlCommand Idcommand = new SqlCommand(getUserId, conn);
+                int userid = Convert.ToInt32(Idcommand.ExecuteScalar());
+
+                // get last tabnumber
+                string getTabNumber = String.Format("SELECT MAX(ID) FROM pList");
+                SqlCommand TabNumbercommand = new SqlCommand(getTabNumber, conn);
+                int tabnumber = Convert.ToInt32(TabNumbercommand.ExecuteScalar());
+
                 int status = 4;
                 string name_adder = "_";
                 string Name = "";
