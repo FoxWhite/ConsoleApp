@@ -27,7 +27,7 @@ namespace ConsoleApp1
 
             System.Data.SqlClient.SqlConnectionStringBuilder builder = new System.Data.SqlClient.SqlConnectionStringBuilder();
             builder["Data Source"] = hostname;
-            builder["integrated Security"] = true;
+            builder["integrated Security"] = false;
             builder["Initial Catalog"] = database;
             builder["user id"] = login;
             builder["Password"] = password;
@@ -51,23 +51,24 @@ namespace ConsoleApp1
                 SqlCommand TabNumbercommand = new SqlCommand(getTabNumber, conn);
                 int tabnumber = Convert.ToInt32(TabNumbercommand.ExecuteScalar());
 
-                int status = 4;
+                int status = 8;
                 string name_adder = "_";
                 string Name = "";
-                string StaticName = "Копылев";
-                string FirstName = "Алексей";
-                string MidName = "Петрович";
+                string StaticName = "Шаблонов";
+                string FirstName = "Шаблон";
+                string MidName = "Шаблонович";
+                int pattern = 1;
                 // circle
                 for (int i = 0; i < 30000; i++)
                 {
                     userid++;
                     tabnumber++;
                     if (i > 0)
-                        Name = StaticName + name_adder + i;
+                        Name = StaticName + name_adder + userid;
                     else
                         Name = StaticName;
                     // do some queries
-                    string sqlExpression = String.Format("INSERT INTO pList (ID, Name, FirstName, Status, MidName, TabNumber) VALUES ({0}, '{1}', '{2}', {3}, '{4}', {5})", userid, Name, FirstName, status, MidName, tabnumber);
+                    string sqlExpression = String.Format("INSERT INTO pList (ID, Name, FirstName, Status, MidName, TabNumber, GrStatus) VALUES ({0}, '{1}', '{2}', {3}, '{4}', {5}, {6})", userid, Name, FirstName, status, MidName, tabnumber, pattern);
                     SqlCommand command = new SqlCommand(sqlExpression, conn);
                     command.ExecuteNonQuery();
                     Console.WriteLine("Добавлен: {0}, '{1}', '{2}', '{3}', {4}", userid, Name, FirstName, MidName, tabnumber);
