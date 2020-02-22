@@ -66,12 +66,12 @@ namespace ConsoleApp1
                     if (i > 0)
                         Name = StaticName + name_adder + userid;
                     else
-                        Name = StaticName;
+                        Name = userid > 1 ? StaticName + name_adder + userid : StaticName;
                     // do some queries
                     string sqlExpression = String.Format("INSERT INTO pList (ID, Name, FirstName, Status, MidName, TabNumber, GrStatus) VALUES ({0}, '{1}', '{2}', {3}, '{4}', {5}, {6})", userid, Name, FirstName, status, MidName, tabnumber, pattern);
                     SqlCommand command = new SqlCommand(sqlExpression, conn);
                     command.ExecuteNonQuery();
-                    Console.WriteLine("Добавлен: {0}, '{1}', '{2}', '{3}', {4}", userid, Name, FirstName, MidName, tabnumber);
+                    Console.WriteLine("Добавлен: {0}, '{1}', '{2}', '{3}', {4}, {5}", userid, Name, FirstName, MidName, tabnumber, pattern);
                 }
 
                 Console.WriteLine("Circle ended");
